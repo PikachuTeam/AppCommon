@@ -12,15 +12,10 @@ public class ClientApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-//        LocalSharedPreferManager.getInstance().init(getApplicationContext());
-//        DataSource.getInstance().init(getApplicationContext());
-//        AppCommon.getInstance().initIfNeeded(getApplicationContext());
-//        AppSpeaker.getInstance().initIfNeeded(getApplicationContext(), Locale.ENGLISH);
     }
 
     @Override
     public void onTerminate() {
-//        DataSource.getInstance().destroy();
         AppCommon.getInstance().destroy();
         AppSpeaker.getInstance().destroy();
         super.onTerminate();
