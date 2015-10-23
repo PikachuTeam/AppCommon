@@ -34,7 +34,7 @@
                     android:id="@+id/img_app_icon"
                     android:layout_width="@dimen/image_more_app_width"
                     android:layout_height="@dimen/image_more_app_width"
-                    android:src="@drawable/ic_launcher" />
+                    android:src="@drawable/more_app_default_icon" />
 
                 <LinearLayout
                     android:layout_width="match_parent"

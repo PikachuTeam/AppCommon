@@ -221,7 +221,8 @@ public class MoreAppsDialog extends Dialog implements View.OnClickListener {
             holder.txtAppDescription.setText("");
             MyAppEntity myApp = myApps.get(position);
             Ion.with(holder.imgAppIcon)
-//                    .error(R.drawable.abc_btn_check_material)
+                    .placeholder(R.drawable.more_app_default_icon)
+                    .error(R.drawable.more_app_default_icon)
                     .load(myApp.image);
             holder.txtAppName.setSelected(true);
             holder.txtAppName.setText(myApp.name);

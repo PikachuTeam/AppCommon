@@ -9,7 +9,7 @@ import android.widget.Toast;
 import java.util.Locale;
 
 import tatteam.com.app_common.AppCommon;
-import tatteam.com.app_common.CloseAppHandler;
+import tatteam.com.app_common.util.CloseAppHandler;
 import tatteam.com.app_common.util.AppSpeaker;
 
 
