@@ -18,7 +18,7 @@ public class CloseAppHandler {
     private AppRate appRate;
     private OnCloseAppListener listener;
 
-    private int rateAppOverLaunchTime = 3;
+    private int rateAppOverLaunchTime = 2;
     private int rateAppOverDate = 1;
     private long backPressedPeriod;
 

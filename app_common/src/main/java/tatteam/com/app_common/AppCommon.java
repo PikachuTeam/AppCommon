@@ -16,20 +16,20 @@ import tatteam.com.app_common.util.AppParseUtil;
 /**
  * Created by ThanhNH-Mac on 10/4/15.
  */
-public class AppSetting {
+public class AppCommon {
 
     private static final int DAY_INTERVAL_RE_SYNC = 3;
 
-    private static AppSetting instance;
+    private static AppCommon instance;
     private Context context;
     private AppConfigEntity appLocalConfig;
 
-    private AppSetting() {
+    private AppCommon() {
     }
 
-    public static AppSetting getInstance() {
+    public static AppCommon getInstance() {
         if (instance == null) {
-            instance = new AppSetting();
+            instance = new AppCommon();
         }
         return instance;
     }
@@ -58,7 +58,7 @@ public class AppSetting {
     public void syncNewConfigAppIfNeeded(String url) {
         if (context != null) {
             if (AppLocalSharedPreferences.getInstance().shouldSyncAppConfig(DAY_INTERVAL_RE_SYNC)) {
-                AppLog.i(">>>> AppSetting # syncNewConfigApp");
+                AppLog.i(">>>> AppCommon # syncNewConfigApp");
                 Ion.with(context)
                         .load(url)
                         .asJsonObject()
@@ -81,19 +81,19 @@ public class AppSetting {
                     appLocalConfig = newConfig;
                     AppLocalSharedPreferences.getInstance().setLocalAppConfig(response.toString());
                     AppLocalSharedPreferences.getInstance().setSyncAppConfigInterval();
-                    AppLog.i(">>>> AppSetting # syncNewConfigApp # New");
+                    AppLog.i(">>>> AppCommon # syncNewConfigApp # New");
                 } else if (appLocalConfig != null && newConfig != null) {
                     if (!appLocalConfig.equalTo(newConfig)) {
                         appLocalConfig = newConfig;
                         AppLocalSharedPreferences.getInstance().setLocalAppConfig(response.toString());
                         AppLocalSharedPreferences.getInstance().setSyncAppConfigInterval();
-                        AppLog.i(">>>> AppSetting # syncNewConfigApp # New");
+                        AppLog.i(">>>> AppCommon # syncNewConfigApp # New");
                     } else {
                         AppLocalSharedPreferences.getInstance().setSyncAppConfigInterval();
-                        AppLog.i(">>>> AppSetting # syncNewConfigApp # Same");
+                        AppLog.i(">>>> AppCommon # syncNewConfigApp # Same");
                     }
                 } else if (newConfig == null) {
-                    AppLog.e(">>>> AppSetting # syncNewConfigApp # Fail");
+                    AppLog.e(">>>> AppCommon # syncNewConfigApp # Fail");
                 }
             }
         });

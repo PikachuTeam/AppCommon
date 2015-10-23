@@ -21,9 +21,7 @@ import com.koushikdutta.ion.Ion;
 
 import java.util.List;
 
-import tatteam.com.app_common.AppSetting;
 import tatteam.com.app_common.R;
-import tatteam.com.app_common.entity.AppConfigEntity;
 import tatteam.com.app_common.entity.MyAppEntity;
 import tatteam.com.app_common.entity.MyExtraAppsEntity;
 import tatteam.com.app_common.util.AppLocalSharedPreferences;
@@ -71,37 +69,40 @@ public class MoreAppsDialog extends Dialog implements View.OnClickListener {
     }
 
     private void downloadData() {
-//        AppConfigEntity appConfigEntity = AppSetting.getInstance().getAppLocalConfig();
+//        AppConfigEntity appConfigEntity = AppCommon.getInstance().getAppLocalConfig();
 //        if (appConfigEntity != null) {
-            AppLog.i(">>>> MoreAppsDialog # downloadData");
-            String url = DEFAULT_URL;//appConfigEntity.myExtraApps.download;
-            getExtraAppFuture = Ion.with(getContext())
-                    .load(url)
-                    .asJsonObject()
-                    .setCallback(new FutureCallback<JsonObject>() {
-                        @Override
-                        public void onCompleted(Exception e, JsonObject result) {
-                            if (result != null) {
+        AppLog.i(">>>> MoreAppsDialog # downloadData");
+        String url = DEFAULT_URL;//appConfigEntity.myExtraApps.download;
+        getExtraAppFuture = Ion.with(getContext())
+                .load(url)
+                .asJsonObject()
+                .setCallback(new FutureCallback<JsonObject>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonObject result) {
+                        if (result != null) {
+                            layoutLoading.setVisibility(View.GONE);
+                            myExtraApps = AppParseUtil.parseExtraApps(result);
+                            displayData();
+                            AppLocalSharedPreferences.getInstance().setMyExtraApps(result.toString());
+                            AppLog.i(">>>> MoreAppsDialog # downloadData # success");
+                        } else {
+                            if (e != null) {
+                                e.printStackTrace();
+                            }
+                            String json = AppLocalSharedPreferences.getInstance().getMyExtraAppsString();
+                            myExtraApps = AppParseUtil.parseExtraApps(json);
+                            if (myExtraApps != null) {
                                 layoutLoading.setVisibility(View.GONE);
-                                myExtraApps = AppParseUtil.parseExtraApps(result);
                                 displayData();
-                                AppLocalSharedPreferences.getInstance().setMyExtraApps(result.toString());
-                                AppLog.i(">>>> MoreAppsDialog # downloadData # success");
+                                AppLog.i(">>>> MoreAppsDialog # downloadData # fail # load cached data # success");
                             } else {
-                                String json = AppLocalSharedPreferences.getInstance().getMyExtraAppsString();
-                                myExtraApps = AppParseUtil.parseExtraApps(json);
-                                if (myExtraApps != null) {
-                                    layoutLoading.setVisibility(View.GONE);
-                                    displayData();
-                                    AppLog.i(">>>> MoreAppsDialog # downloadData # fail # load cached data # success");
-                                } else {
-                                    progressBar.setVisibility(View.GONE);
-                                    txtLoading.setText("Can not connect to server!");
-                                    AppLog.e(">>>> MoreAppsDialog # downloadData # fail # load cached data # fail");
-                                }
+                                progressBar.setVisibility(View.GONE);
+                                txtLoading.setText("Can not connect to server!");
+                                AppLog.e(">>>> MoreAppsDialog # downloadData # fail # load cached data # fail");
                             }
                         }
-                    });
+                    }
+                });
 //        }
 //    else {
 //            progressBar.setVisibility(View.GONE);
@@ -180,6 +181,7 @@ public class MoreAppsDialog extends Dialog implements View.OnClickListener {
             public ImageView imgAppIcon;
             public TextView txtAppName;
             public TextView txtAppDescription;
+
             public ViewHolder(View item) {
                 super(item);
                 imgAppIcon = (ImageView) item.findViewById(R.id.img_app_icon);

@@ -2,25 +2,64 @@ package com.tatteam;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
-import tatteam.com.app_common.AppSetting;
+import java.util.Locale;
+
+import tatteam.com.app_common.AppCommon;
 import tatteam.com.app_common.CloseAppHandler;
+import tatteam.com.app_common.util.AppSpeaker;
 
-public class MainActivity extends AppCompatActivity implements CloseAppHandler.OnCloseAppListener {
+
+public class MainActivity extends AppCompatActivity implements CloseAppHandler.OnCloseAppListener, View.OnClickListener {
     private CloseAppHandler closeAppHandler;
-
+    private Button btnMoreApps;
+    private Button bntTextToSpeech;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        AppSetting.getInstance().initIfNeeded(getApplicationContext());
-        AppSetting.getInstance().increaseLaunchTime();
-        AppSetting.getInstance().openMoreAppDialog(this);
+        findViews();
+
+        AppCommon.getInstance().initIfNeeded(getApplicationContext());
+        AppSpeaker.getInstance().initIfNeeded(getApplicationContext(), Locale.ENGLISH);
 
         closeAppHandler = new CloseAppHandler(this);
         closeAppHandler.setListener(this);
+
+    }
+
+    private void findViews() {
+        btnMoreApps = (Button) findViewById(R.id.btn_more_apps);
+        bntTextToSpeech = (Button) findViewById(R.id.btn_text_to_speech);
+
+        btnMoreApps.setOnClickListener(this);
+        bntTextToSpeech.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view == btnMoreApps) {
+            AppCommon.getInstance().openMoreAppDialog(this);
+        } else if (view == bntTextToSpeech) {
+            String message = "Hello world";
+            if (AppSpeaker.getInstance().ready()) {
+                AppSpeaker.getInstance().speak(message);
+            }
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if (AppSpeaker.getInstance().ready()) {
+            AppSpeaker.getInstance().stop();
+        }
     }
 
     @Override
@@ -36,11 +75,13 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
 
     @Override
     public void onTryToCloseApp() {
-        Toast.makeText(this, "again!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getString(R.string.message_exit), Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onReallyWantToCloseApp() {
         finish();
     }
+
+
 }

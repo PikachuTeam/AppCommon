@@ -52,11 +52,11 @@ public class FlatEffectDrawable extends RelativeLayout {
     private void setup() {
         this.setClickable(true);
         highlight = new FrameLayout(getContext());
-        highlight.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         highlight.setBackgroundColor(Color.TRANSPARENT);
         this.post(new Runnable() {
             @Override
             public void run() {
+                highlight.setLayoutParams(new LayoutParams(FlatEffectDrawable.this.getWidth(), FlatEffectDrawable.this.getHeight()));
                 addView(highlight);
             }
         });
