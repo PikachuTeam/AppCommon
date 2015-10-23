@@ -30,7 +30,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="Apps" />
+                    android:text="Apps"
+                    android:textColor="@color/dialog_text_color"
+                    android:textSize="@dimen/text_more_app_tab_size" />
 
                 <View
                     android:layout_width="@dimen/line_1"
@@ -55,7 +57,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:text="Games" />
+                    android:text="Games"
+                    android:textColor="@color/dialog_text_color"
+                    android:textSize="@dimen/text_more_app_tab_size" />
 
                 <View
                     android:layout_width="match_parent"
@@ -97,6 +101,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/dialog_more_app_text_loading_margin"
                     android:text="Loading..."
+                    android:textColor="@color/dialog_text_color"
                     android:textSize="@dimen/dialog_more_app_text_loading_size" />
             </LinearLayout>
         </RelativeLayout>
@@ -111,7 +116,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="Close" />
+                android:text="Close"
+                android:textColor="@color/dialog_text_color"
+                android:textSize="@dimen/text_more_app_tab_size" />
 
             <View
                 android:layout_width="match_parent"

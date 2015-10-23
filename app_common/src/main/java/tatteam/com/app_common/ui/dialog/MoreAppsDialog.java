@@ -35,6 +35,7 @@ import tatteam.com.app_common.util.CommonUtil;
  * Created by ThanhNH on 10/11/2015.
  */
 public class MoreAppsDialog extends Dialog implements View.OnClickListener {
+    private static final String DEFAULT_URL = "https://www.dropbox.com/s/faa5s1wzl0izcg1/my_extra_apps.txt?dl=1";
     private static final int TAB_MODE_APPS = 1;
     private static final int TAB_MODE_GAMES = 2;
 
@@ -70,10 +71,10 @@ public class MoreAppsDialog extends Dialog implements View.OnClickListener {
     }
 
     private void downloadData() {
-        AppConfigEntity appConfigEntity = AppSetting.getInstance().getAppLocalConfig();
-        if (appConfigEntity != null) {
+//        AppConfigEntity appConfigEntity = AppSetting.getInstance().getAppLocalConfig();
+//        if (appConfigEntity != null) {
             AppLog.i(">>>> MoreAppsDialog # downloadData");
-            String url = appConfigEntity.myExtraApps.download;
+            String url = DEFAULT_URL;//appConfigEntity.myExtraApps.download;
             getExtraAppFuture = Ion.with(getContext())
                     .load(url)
                     .asJsonObject()
@@ -101,11 +102,12 @@ public class MoreAppsDialog extends Dialog implements View.OnClickListener {
                             }
                         }
                     });
-        } else {
-            progressBar.setVisibility(View.GONE);
-            txtLoading.setText("Can not connect to server");
-            AppLog.e(">>>> MoreAppsDialog # downloadData  # fail");
-        }
+//        }
+//    else {
+//            progressBar.setVisibility(View.GONE);
+//            txtLoading.setText("Can not connect to server");
+//            AppLog.e(">>>> MoreAppsDialog # downloadData  # fail");
+//        }
     }
 
     private void displayData() {
@@ -176,7 +178,8 @@ public class MoreAppsDialog extends Dialog implements View.OnClickListener {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             public ImageView imgAppIcon;
-
+            public TextView txtAppName;
+            public TextView txtAppDescription;
             public ViewHolder(View item) {
                 super(item);
                 imgAppIcon = (ImageView) item.findViewById(R.id.img_app_icon);
@@ -184,9 +187,16 @@ public class MoreAppsDialog extends Dialog implements View.OnClickListener {
                     @Override
                     public void onClick(View v) {
                         MyAppEntity myAppEntity = myApps.get(getAdapterPosition());
-                        CommonUtil.openGooglePlay(activity, myAppEntity.packageName);
+                        try {
+                            CommonUtil.openGooglePlay(activity, myAppEntity.packageName);
+                        } catch (Exception e) {
+//                            e.printStackTrace();
+                        }
                     }
                 });
+
+                txtAppName = (TextView) item.findViewById(R.id.txt_app_name);
+                txtAppDescription = (TextView) item.findViewById(R.id.txt_app_description);
             }
         }
 
@@ -205,10 +215,15 @@ public class MoreAppsDialog extends Dialog implements View.OnClickListener {
         // Replace the contents of a view (invoked by the layout manager)
         @Override
         public void onBindViewHolder(ViewHolder holder, int position) {
+            holder.txtAppName.setText("");
+            holder.txtAppDescription.setText("");
             MyAppEntity myApp = myApps.get(position);
             Ion.with(holder.imgAppIcon)
 //                    .error(R.drawable.abc_btn_check_material)
                     .load(myApp.image);
+            holder.txtAppName.setSelected(true);
+            holder.txtAppName.setText(myApp.name);
+            holder.txtAppDescription.setText(myApp.description);
 
         }
 

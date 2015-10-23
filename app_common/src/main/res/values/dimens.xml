@@ -4,6 +4,7 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="line_1">1dp</dimen>
+    <dimen name="text_more_app_tab_size">18sp</dimen>
     <dimen name="dialog_more_app_width">300dp</dimen>
     <dimen name="dialog_more_app_height">450dp</dimen>
     <dimen name="dialog_more_app_progress_bar_width">80dp</dimen>
@@ -16,4 +17,7 @@
     <dimen name="item_more_app_conner_radius">5dp</dimen>
     <dimen name="item_more_app_padding">5dp</dimen>
     <dimen name="image_more_app_width">75dp</dimen>
+    <dimen name="text_more_app_margin">8dp</dimen>
+    <dimen name="text_more_app_size_1">20sp</dimen>
+    <dimen name="text_more_app_size_2">13sp</dimen>
 </resources>
