@@ -22,8 +22,8 @@ public class CloseAppHandler {
     private int rateAppOverDate = 1;
     private long backPressedPeriod;
 
-    public CloseAppHandler(Context context) {
-        this.context = context;
+    public CloseAppHandler(Activity activity) {
+        this.context = activity;
         setupRateApp();
     }
 

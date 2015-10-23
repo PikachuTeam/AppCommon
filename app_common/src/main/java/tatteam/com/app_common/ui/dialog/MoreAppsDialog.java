@@ -96,7 +96,7 @@ public class MoreAppsDialog extends Dialog implements View.OnClickListener {
                                     AppLog.i(">>>> MoreAppsDialog # downloadData # fail # load cached data # success");
                                 } else {
                                     progressBar.setVisibility(View.GONE);
-                                    txtLoading.setText("Can not connect to server");
+                                    txtLoading.setText("Can not connect to server!");
                                     AppLog.e(">>>> MoreAppsDialog # downloadData # fail # load cached data # fail");
                                 }
                             }
