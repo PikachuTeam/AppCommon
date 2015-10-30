@@ -21,7 +21,7 @@ public class CommonUtil {
     public static void openDeveloperPageOnGooglePlay(Context context, String pubName) {
         try {
             Intent intent = new Intent(Intent.ACTION_VIEW);
-            intent.setData(Uri.parse("market://search?q=pub:"+pubName));
+            intent.setData(Uri.parse("market://search?q=pub:" + pubName));
             context.startActivity(intent);
         } catch (Exception ex) {
             ex.printStackTrace();

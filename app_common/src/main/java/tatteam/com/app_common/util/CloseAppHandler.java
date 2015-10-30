@@ -16,7 +16,7 @@ public class CloseAppHandler {
     private AppRate appRate;
     private OnCloseAppListener listener;
 
-    private int rateAppOverLaunchTime = 2;
+    private int rateAppOverLaunchTime = 3;
     private int rateAppOverDate = 1;
     private long backPressedPeriod;
 
@@ -55,9 +55,10 @@ public class CloseAppHandler {
     }
 
     private boolean showDialogIfNeeded(Activity activity) {
-        if (!AppLocalSharedPreferences.getInstance().isRateApp() &&
+        if (!AppLocalSharedPreferences.getInstance().isRatedApp() &&
                 AppLocalSharedPreferences.getInstance().isRateAppOverLaunchTime(rateAppOverLaunchTime) &&
-                AppLocalSharedPreferences.getInstance().isRateAppOverDate(rateAppOverDate)) {
+                (AppLocalSharedPreferences.getInstance().isRateAppOverDate(rateAppOverDate) ||
+                        AppLocalSharedPreferences.getInstance().getAppLaunchTime() % rateAppOverLaunchTime == 0)) {
             appRate.showRateDialogIfMeetsConditions(activity);
             return true;
         }

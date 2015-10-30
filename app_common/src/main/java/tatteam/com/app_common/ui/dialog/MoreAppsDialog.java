@@ -24,6 +24,7 @@ import java.util.List;
 import tatteam.com.app_common.R;
 import tatteam.com.app_common.entity.MyAppEntity;
 import tatteam.com.app_common.entity.MyExtraAppsEntity;
+import tatteam.com.app_common.util.AppConstant;
 import tatteam.com.app_common.util.AppLocalSharedPreferences;
 import tatteam.com.app_common.util.AppLog;
 import tatteam.com.app_common.util.AppParseUtil;
@@ -32,8 +33,8 @@ import tatteam.com.app_common.util.CommonUtil;
 /**
  * Created by ThanhNH on 10/11/2015.
  */
-public class MoreAppsDialog extends Dialog implements View.OnClickListener {
-    private static final String DEFAULT_URL = "https://www.dropbox.com/s/faa5s1wzl0izcg1/my_extra_apps.txt?dl=1";
+public class MoreAppsDialog extends Dialog implements AppConstant,View.OnClickListener {
+
     private static final int TAB_MODE_APPS = 1;
     private static final int TAB_MODE_GAMES = 2;
 
@@ -73,7 +74,7 @@ public class MoreAppsDialog extends Dialog implements View.OnClickListener {
 //        AppConfigEntity appConfigEntity = AppCommon.getInstance().getAppLocalConfig();
 //        if (appConfigEntity != null) {
         AppLog.i(">>>> MoreAppsDialog # downloadData");
-        String url = DEFAULT_URL;//appConfigEntity.myExtraApps.download;
+        String url = DEFAULT_EXTRA_APP_URL;//appConfigEntity.myExtraApps.download;
         getExtraAppFuture = Ion.with(getContext())
                 .load(url)
                 .asJsonObject()

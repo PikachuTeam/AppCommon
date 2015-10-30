@@ -4,11 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import java.util.Locale;
 
 import tatteam.com.app_common.AppCommon;
+import tatteam.com.app_common.ads.AdsSmallBannerHandler;
 import tatteam.com.app_common.util.AppSpeaker;
 import tatteam.com.app_common.util.CloseAppHandler;
 
@@ -17,6 +19,8 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
     private CloseAppHandler closeAppHandler;
     private Button btnMoreApps;
     private Button bntTextToSpeech;
+    private FrameLayout adsContainer;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +33,11 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
 
         closeAppHandler = new CloseAppHandler(this);
         closeAppHandler.setListener(this);
+
+        adsContainer = (FrameLayout) findViewById(R.id.ads_container);
+
+        AdsSmallBannerHandler adsHandler = new AdsSmallBannerHandler(this, adsContainer);
+        adsHandler.setup();
 
     }
 
