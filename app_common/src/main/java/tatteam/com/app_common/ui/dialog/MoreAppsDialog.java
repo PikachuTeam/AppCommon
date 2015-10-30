@@ -1,5 +1,6 @@
 package tatteam.com.app_common.ui.dialog;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -41,6 +42,7 @@ public class MoreAppsDialog extends Dialog implements View.OnClickListener {
     private TextView txtGames;
     private RecyclerView recyclerView;
     private TextView txtClose;
+    private TextView txtVisitStore;
     private TextView txtLoading;
     private View layoutLoading;
     private ProgressBar progressBar;
@@ -136,10 +138,12 @@ public class MoreAppsDialog extends Dialog implements View.OnClickListener {
         txtApps = (TextView) findViewById(R.id.txt_apps);
         txtGames = (TextView) findViewById(R.id.txt_games);
         txtClose = (TextView) findViewById(R.id.txt_close);
+        txtVisitStore = (TextView) findViewById(R.id.txt_visit_store);
         progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         txtApps.setOnClickListener(this);
         txtGames.setOnClickListener(this);
         txtClose.setOnClickListener(this);
+        txtVisitStore.setOnClickListener(this);
     }
 
     private void setupRecycleView() {
@@ -161,6 +165,11 @@ public class MoreAppsDialog extends Dialog implements View.OnClickListener {
                 displayData();
             }
         } else if (v == txtClose) {
+            dismiss();
+        } else if (v == txtVisitStore) {
+            if (myExtraApps != null) {
+                CommonUtil.openDeveloperPageOnGooglePlay(getContext(), myExtraApps.myPubName);
+            }
             dismiss();
         }
     }
@@ -189,11 +198,7 @@ public class MoreAppsDialog extends Dialog implements View.OnClickListener {
                     @Override
                     public void onClick(View v) {
                         MyAppEntity myAppEntity = myApps.get(getAdapterPosition());
-                        try {
-                            CommonUtil.openGooglePlay(activity, myAppEntity.packageName);
-                        } catch (Exception e) {
-//                            e.printStackTrace();
-                        }
+                        CommonUtil.openApplicationOnGooglePlay(activity, myAppEntity.packageName);
                     }
                 });
 
