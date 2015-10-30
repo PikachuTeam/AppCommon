@@ -1,6 +1,5 @@
 package tatteam.com.app_common.util;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;

@@ -3,10 +3,8 @@ package tatteam.com.app_common.util;
 import android.app.Activity;
 import android.content.Context;
 
-
 import hotchemi.android.rate.AppRate;
 import hotchemi.android.rate.OnClickButtonListener;
-import tatteam.com.app_common.util.AppLocalSharedPreferences;
 
 /**
  * Created by ThanhNH on 10/8/2015.

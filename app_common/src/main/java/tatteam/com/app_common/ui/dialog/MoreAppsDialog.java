@@ -1,6 +1,5 @@
 package tatteam.com.app_common.ui.dialog;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;

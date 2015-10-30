@@ -1,7 +1,7 @@
 package com.tatteam;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -9,8 +9,8 @@ import android.widget.Toast;
 import java.util.Locale;
 
 import tatteam.com.app_common.AppCommon;
-import tatteam.com.app_common.util.CloseAppHandler;
 import tatteam.com.app_common.util.AppSpeaker;
+import tatteam.com.app_common.util.CloseAppHandler;
 
 
 public class MainActivity extends AppCompatActivity implements CloseAppHandler.OnCloseAppListener, View.OnClickListener {
