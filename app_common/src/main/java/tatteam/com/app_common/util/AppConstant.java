@@ -7,13 +7,16 @@ public interface AppConstant {
     String DEFAULT_ADS_URL = "https://www.dropbox.com/s/2fy36ay5po304eo/my_ads.txt?dl=1";
     String DEFAULT_EXTRA_APP_URL = "https://www.dropbox.com/s/faa5s1wzl0izcg1/my_extra_apps.txt?dl=1";
 
-    int RE_SYNC_INTERVAL = 3;
+    int RE_SYNC_ADS_INTERVAL = 4;
 
     enum AdsType {
         SMALL_BANNER_TEST("small_banner_test"),
         SMALL_BANNER_GAME("small_banner_game"),
         SMALL_BANNER_LANGUAGE_LEARNING("small_banner_language_learning"),
-        SMALL_BANNER_DRIVING_TEST("small_banner_driving_test");
+        SMALL_BANNER_DRIVING_TEST("small_banner_driving_test"),
+        BIG_BANNER_TEST("big_banner_test"),
+        BIG_BANNER_GAME("big_banner_game");
+
         private String type;
 
         private AdsType(String type) {
@@ -23,5 +26,6 @@ public interface AppConstant {
         public String getType() {
             return type;
         }
+
     }
 }

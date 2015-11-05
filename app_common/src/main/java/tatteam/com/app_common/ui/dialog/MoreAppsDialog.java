@@ -71,10 +71,8 @@ public class MoreAppsDialog extends Dialog implements AppConstant, View.OnClickL
     }
 
     private void downloadData() {
-//        AppConfigEntity appConfigEntity = AppCommon.getInstance().getAppLocalConfig();
-//        if (appConfigEntity != null) {
         AppLog.i(">>>> MoreAppsDialog # downloadData");
-        String url = DEFAULT_EXTRA_APP_URL;//appConfigEntity.myExtraApps.download;
+        String url = DEFAULT_EXTRA_APP_URL;
         getExtraAppFuture = Ion.with(getContext())
                 .load(url)
                 .asJsonObject()
@@ -105,12 +103,6 @@ public class MoreAppsDialog extends Dialog implements AppConstant, View.OnClickL
                         }
                     }
                 });
-//        }
-//    else {
-//            progressBar.setVisibility(View.GONE);
-//            txtLoading.setText("Can not connect to server");
-//            AppLog.e(">>>> MoreAppsDialog # downloadData  # fail");
-//        }
     }
 
     private void displayData() {

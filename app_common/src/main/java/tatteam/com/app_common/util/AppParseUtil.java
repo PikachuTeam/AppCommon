@@ -5,8 +5,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-import tatteam.com.app_common.entity.AppConfigEntity;
-import tatteam.com.app_common.entity.MyAdsEntity;
 import tatteam.com.app_common.entity.MyAppEntity;
 import tatteam.com.app_common.entity.MyExtraAppsEntity;
 
@@ -15,60 +13,6 @@ import tatteam.com.app_common.entity.MyExtraAppsEntity;
  */
 public class AppParseUtil {
 
-    public static AppConfigEntity parseAppConfig(String json) {
-        AppConfigEntity appConfig = null;
-        if (json != null && !json.trim().isEmpty()) {
-            try {
-                Gson gson = new Gson();
-                JsonElement element = gson.fromJson(json, JsonElement.class);
-                JsonObject jsonObj = element.getAsJsonObject();
-                appConfig = parseAppConfig(jsonObj);
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-        return appConfig;
-    }
-
-    public static AppConfigEntity parseAppConfig(JsonObject jsonObj) {
-        AppConfigEntity appConfig = null;
-        if (jsonObj != null) {
-            try {
-                appConfig = new AppConfigEntity();
-
-                JsonObject app = jsonObj.getAsJsonObject("app");
-                appConfig.app.appName = app.get("app_name").getAsString();
-                appConfig.app.appVer = app.get("app_version").getAsString();
-
-                JsonObject ads = jsonObj.getAsJsonObject("ads");
-                appConfig.ads.adsVer = ads.get("ads_version").getAsString();
-
-                JsonObject google_ads = ads.getAsJsonObject("google_ads");
-                appConfig.ads.googleAds.smallBannerId = google_ads.get("small_banner_id").getAsString();
-                appConfig.ads.googleAds.biBannerId = google_ads.get("big_banner_id").getAsString();
-
-                JsonArray jsonArray = ads.getAsJsonArray("my_ads");
-                for (int i = 0; i < jsonArray.size(); i++) {
-                    JsonObject my_ads = jsonArray.get(i).getAsJsonObject();
-                    MyAdsEntity myAdsObj = new MyAdsEntity();
-                    myAdsObj.packageName = my_ads.get("package_name").getAsString();
-                    myAdsObj.priority = my_ads.get("priority").getAsInt();
-                    myAdsObj.urlImage = my_ads.get("image").getAsString();
-                    myAdsObj.downLoad = my_ads.get("download").getAsString();
-                    appConfig.ads.myAds.add(myAdsObj);
-                }
-
-                JsonObject my_extra_apps = jsonObj.getAsJsonObject("my_extra_apps");
-                appConfig.myExtraApps.myExtraAppsVersion = my_extra_apps.get("my_extra_apps_version").getAsString();
-                appConfig.myExtraApps.download = my_extra_apps.get("download").getAsString();
-            } catch (Exception e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-        return appConfig;
-    }
 
     public static MyExtraAppsEntity parseExtraApps(String json) {
         MyExtraAppsEntity extraApps = null;
