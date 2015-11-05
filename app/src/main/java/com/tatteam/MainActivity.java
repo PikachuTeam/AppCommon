@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
 
     @Override
     public void onTryToCloseApp() {
-        Toast.makeText(this, getString(R.string.message_exit), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, closeAppHandler.getDefaultExitMessage(), Toast.LENGTH_SHORT).show();
     }
 
     @Override
