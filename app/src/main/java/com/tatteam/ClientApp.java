@@ -3,6 +3,7 @@ package com.tatteam;
 import android.app.Application;
 
 import tatteam.com.app_common.AppCommon;
+import tatteam.com.app_common.sqlite.DatabaseLoader;
 import tatteam.com.app_common.util.AppSpeaker;
 
 /**
@@ -18,6 +19,8 @@ public class ClientApp extends Application {
     public void onTerminate() {
         AppCommon.getInstance().destroy();
         AppSpeaker.getInstance().destroy();
+        DatabaseLoader.getInstance().destroy();
+
         super.onTerminate();
     }
 }
