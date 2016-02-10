@@ -50,7 +50,7 @@ public class AppCommon implements AppConstant {
     }
 
     public void syncAdsIfNeeded(final AdsType... adsTypes) {
-        if (AppLocalSharedPreferences.getInstance().shouldSyncAds(RE_SYNC_ADS_INTERVAL, adsTypes)) {
+        if (AppLocalSharedPreferences.getInstance().shouldSyncAds(RE_SYNC_ADS_LAUNCH_TIME_INTERVAL, adsTypes)) {
             Ion.with(context)
                     .load(DEFAULT_ADS_URL)
                     .asJsonObject()
