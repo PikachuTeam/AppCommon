@@ -2,7 +2,6 @@ package com.tatteam;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -16,7 +15,6 @@ import tatteam.com.app_common.ads.AdsSmallBannerHandler;
 import tatteam.com.app_common.util.AppConstant;
 import tatteam.com.app_common.util.AppSpeaker;
 import tatteam.com.app_common.util.CloseAppHandler;
-import tatteam.com.app_common.util.CommonUtil;
 
 
 public class MainActivity extends AppCompatActivity implements CloseAppHandler.OnCloseAppListener, View.OnClickListener {
@@ -24,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
     private Button btnMoreApps;
     private Button bntTextToSpeech;
     private Button bntAdsBigBanner;
+    private Button btn_select_sqlite;
     private FrameLayout adsContainer;
     private AdsSmallBannerHandler adsSmallBannerHandler;
     private AdsBigBannerHandler adsBigBannerHandler;
@@ -50,10 +49,13 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
         btnMoreApps = (Button) findViewById(R.id.btn_more_apps);
         bntTextToSpeech = (Button) findViewById(R.id.btn_text_to_speech);
         bntAdsBigBanner = (Button) findViewById(R.id.btn_ads_big_banner);
+        btn_select_sqlite = (Button) findViewById(R.id.btn_select_sqlite);
+
 
         btnMoreApps.setOnClickListener(this);
         bntTextToSpeech.setOnClickListener(this);
         bntAdsBigBanner.setOnClickListener(this);
+        btn_select_sqlite.setOnClickListener(this);
     }
 
     private void setupAds() {
@@ -76,6 +78,9 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         } else if (view == bntAdsBigBanner) {
             adsBigBannerHandler.show();
+        } else if (view == btn_select_sqlite) {
+            int count = DataSource.countExams();
+            Toast.makeText(this, count + " exams", Toast.LENGTH_SHORT).show();
         }
 
     }
