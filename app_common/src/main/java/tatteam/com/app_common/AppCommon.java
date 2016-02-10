@@ -40,7 +40,11 @@ public class AppCommon implements AppConstant {
     }
 
     public MoreAppsDialog openMoreAppDialog(Context activity) {
-        MoreAppsDialog moreAppsDialog = new MoreAppsDialog(activity);
+        return openMoreAppDialog(activity, null);
+    }
+
+    public MoreAppsDialog openMoreAppDialog(Context activity, String url) {
+        MoreAppsDialog moreAppsDialog = new MoreAppsDialog(activity, url);
         moreAppsDialog.show();
         return moreAppsDialog;
     }

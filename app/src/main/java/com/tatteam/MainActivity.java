@@ -2,6 +2,7 @@ package com.tatteam;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -15,6 +16,7 @@ import tatteam.com.app_common.ads.AdsSmallBannerHandler;
 import tatteam.com.app_common.util.AppConstant;
 import tatteam.com.app_common.util.AppSpeaker;
 import tatteam.com.app_common.util.CloseAppHandler;
+import tatteam.com.app_common.util.CommonUtil;
 
 
 public class MainActivity extends AppCompatActivity implements CloseAppHandler.OnCloseAppListener, View.OnClickListener {

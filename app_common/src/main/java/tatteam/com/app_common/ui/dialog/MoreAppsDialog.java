@@ -14,7 +14,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.Future;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
@@ -26,7 +25,6 @@ import tatteam.com.app_common.entity.MyAppEntity;
 import tatteam.com.app_common.entity.MyExtraAppsEntity;
 import tatteam.com.app_common.util.AppConstant;
 import tatteam.com.app_common.util.AppLocalSharedPreferences;
-import tatteam.com.app_common.util.AppLog;
 import tatteam.com.app_common.util.AppParseUtil;
 import tatteam.com.app_common.util.CommonUtil;
 
@@ -51,9 +49,15 @@ public class MoreAppsDialog extends Dialog implements AppConstant, View.OnClickL
     private Future getExtraAppFuture;
     private MyExtraAppsEntity myExtraApps;
     private int tabMode = TAB_MODE_APPS;
+    private String url;
 
-    public MoreAppsDialog(Context context) {
+
+    public MoreAppsDialog(Context context, String url) {
         super(context);
+        this.url = url;
+        if (this.url == null || this.url.isEmpty()) {
+            this.url = DEFAULT_MORE_APP_URL;
+        }
     }
 
     @Override
@@ -71,35 +75,33 @@ public class MoreAppsDialog extends Dialog implements AppConstant, View.OnClickL
     }
 
     private void downloadData() {
-        AppLog.i(">>>> MoreAppsDialog # downloadData");
-        String url = DEFAULT_EXTRA_APP_URL;
+        //load from local first
+        String localJson = AppLocalSharedPreferences.getInstance().getMyExtraAppsString();
+        if (localJson != null && !localJson.isEmpty()) {
+            layoutLoading.setVisibility(View.GONE);
+            myExtraApps = AppParseUtil.parseExtraApps(localJson);
+            if (!myExtraApps.my_apps.isEmpty()) {
+                displayData();
+            } else {
+                AppLocalSharedPreferences.getInstance().setMyExtraApps("");
+            }
+        }
+
+        //load from server
         getExtraAppFuture = Ion.with(getContext())
                 .load(url)
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>() {
+                .asString()
+                .setCallback(new FutureCallback<String>() {
                     @Override
-                    public void onCompleted(Exception e, JsonObject result) {
+                    public void onCompleted(Exception e, String result) {
                         if (result != null) {
-                            layoutLoading.setVisibility(View.GONE);
-                            myExtraApps = AppParseUtil.parseExtraApps(result);
-                            displayData();
-                            AppLocalSharedPreferences.getInstance().setMyExtraApps(result.toString());
-                            AppLog.i(">>>> MoreAppsDialog # downloadData # success");
-                        } else {
-                            if (e != null) {
-                                e.printStackTrace();
-                            }
-                            String json = AppLocalSharedPreferences.getInstance().getMyExtraAppsString();
-                            myExtraApps = AppParseUtil.parseExtraApps(json);
-                            if (myExtraApps != null) {
-                                layoutLoading.setVisibility(View.GONE);
+                            String localJson = AppLocalSharedPreferences.getInstance().getMyExtraAppsString();
+                            if (localJson == null || localJson.isEmpty()) {
+                                myExtraApps = AppParseUtil.parseExtraApps(result);
                                 displayData();
-                                AppLog.i(">>>> MoreAppsDialog # downloadData # fail # load cached data # success");
-                            } else {
-                                progressBar.setVisibility(View.GONE);
-                                txtLoading.setText("Can not connect to server!");
-                                AppLog.e(">>>> MoreAppsDialog # downloadData # fail # load cached data # fail");
                             }
+                            AppLocalSharedPreferences.getInstance().setMyExtraApps(result);
+                            layoutLoading.setVisibility(View.GONE);
                         }
                     }
                 });
@@ -115,9 +117,9 @@ public class MoreAppsDialog extends Dialog implements AppConstant, View.OnClickL
         }
         if (myExtraApps != null) {
             if (tabMode == TAB_MODE_APPS) {
-                adapter = new MyAdapter(getContext(), myExtraApps.appList);
+                adapter = new MyAdapter(getContext(), myExtraApps.my_apps);
             } else if (tabMode == TAB_MODE_GAMES) {
-                adapter = new MyAdapter(getContext(), myExtraApps.gameList);
+                adapter = new MyAdapter(getContext(), myExtraApps.my_games);
             }
             recyclerView.setAdapter(adapter);
         }
@@ -160,7 +162,7 @@ public class MoreAppsDialog extends Dialog implements AppConstant, View.OnClickL
             dismiss();
         } else if (v == txtVisitStore) {
             if (myExtraApps != null) {
-                CommonUtil.openDeveloperPageOnGooglePlay(getContext(), myExtraApps.myPubName);
+                CommonUtil.openDeveloperPageOnGooglePlay(getContext(), myExtraApps.my_pub_name);
                 dismiss();
             }
         }
@@ -190,7 +192,7 @@ public class MoreAppsDialog extends Dialog implements AppConstant, View.OnClickL
                     @Override
                     public void onClick(View v) {
                         MyAppEntity myAppEntity = myApps.get(getAdapterPosition());
-                        CommonUtil.openApplicationOnGooglePlay(activity, myAppEntity.packageName);
+                        CommonUtil.openApplicationOnGooglePlay(activity, myAppEntity.package_name);
                     }
                 });
 

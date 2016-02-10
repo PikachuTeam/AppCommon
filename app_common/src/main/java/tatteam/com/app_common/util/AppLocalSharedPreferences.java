@@ -38,7 +38,7 @@ public class AppLocalSharedPreferences {
 
 
     public String getMyExtraAppsString() {
-        return pref.getString(PREF_MY_EXTRA_APPS, null);
+        return pref.getString(PREF_MY_EXTRA_APPS, "");
     }
 
     public void setMyExtraApps(String jSon) {
