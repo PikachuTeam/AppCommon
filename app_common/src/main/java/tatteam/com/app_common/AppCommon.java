@@ -37,6 +37,7 @@ public class AppCommon implements AppConstant {
 
     public void increaseLaunchTime() {
         AppLocalSharedPreferences.getInstance().increaseAppLaunchTime();
+        AppLocalSharedPreferences.getInstance().setSkipRating(false);
     }
 
     public MoreAppsDialog openMoreAppDialog(Context activity) {

@@ -1,5 +1,6 @@
 package com.tatteam;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
     private Button btnMoreApps;
     private Button bntTextToSpeech;
     private Button bntAdsBigBanner;
-    private Button btn_select_sqlite;
+    private Button btn_select_sqlite, btn_base_activity;
     private FrameLayout adsContainer;
     private AdsSmallBannerHandler adsSmallBannerHandler;
     private AdsBigBannerHandler adsBigBannerHandler;
@@ -50,12 +51,13 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
         bntTextToSpeech = (Button) findViewById(R.id.btn_text_to_speech);
         bntAdsBigBanner = (Button) findViewById(R.id.btn_ads_big_banner);
         btn_select_sqlite = (Button) findViewById(R.id.btn_select_sqlite);
-
+        btn_base_activity = (Button) findViewById(R.id.btn_base_activity);
 
         btnMoreApps.setOnClickListener(this);
         bntTextToSpeech.setOnClickListener(this);
         bntAdsBigBanner.setOnClickListener(this);
         btn_select_sqlite.setOnClickListener(this);
+        btn_base_activity.setOnClickListener(this);
     }
 
     private void setupAds() {
@@ -81,8 +83,9 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
         } else if (view == btn_select_sqlite) {
             int count = DataSource.countExams();
             Toast.makeText(this, count + " exams", Toast.LENGTH_SHORT).show();
+        } else if (view == btn_base_activity) {
+            startActivity(new Intent(this, DemoBaseActivity.class));
         }
-
     }
 
     @Override
@@ -101,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
 
     @Override
     public void onRateAppDialogClose() {
-        finish();
+//        finish();
     }
 
     @Override

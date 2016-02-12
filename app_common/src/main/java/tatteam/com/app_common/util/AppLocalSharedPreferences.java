@@ -13,6 +13,7 @@ public class AppLocalSharedPreferences {
     private static final String PREF_LAUNCH_TIME = "app_launch_time";
     private static final String PREF_RATE_APP = "app_rate";
     private static final String PREF_RATE_INTERVAL = "app_rate_interval";
+    private static final String PREF_RATE_SKIP = "app_rate_skip";
     private static final String PREF_MY_EXTRA_APPS = "my_extra_apps";
 
     private static AppLocalSharedPreferences instance;
@@ -71,6 +72,15 @@ public class AppLocalSharedPreferences {
 
     public boolean isRatedApp() {
         return pref.getBoolean(PREF_RATE_APP, false);
+    }
+
+    public void setSkipRating(boolean isSkip) {
+        editor.putBoolean(PREF_RATE_SKIP, isSkip);
+        editor.commit();
+    }
+
+    public boolean isSkipRating() {
+        return pref.getBoolean(PREF_RATE_SKIP, false);
     }
 
     public void setRateAppRemindInterval() {

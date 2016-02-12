@@ -26,11 +26,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Asd Big Banner" />
+
         <Button
             android:id="@+id/btn_select_sqlite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="SELECT SQLITE" />
+
+        <Button
+            android:id="@+id/btn_base_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Base Activity" />
 
         <tatteam.com.app_common.ui.drawable.FlatEffectDrawable
             android:layout_width="wrap_content"

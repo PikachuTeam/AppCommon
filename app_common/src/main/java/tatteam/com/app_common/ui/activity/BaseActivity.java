@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import tatteam.com.app_common.R;
 import tatteam.com.app_common.ui.fragment.BaseFragment;
@@ -66,8 +67,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         return objectHolder;
     }
 
-    public void getHolder(String key) {
-        objectHolder.get(key);
+    public Object getHolder(String key) {
+       return objectHolder.get(key);
     }
 
     public void putHolder(String key, Object value) {
@@ -93,6 +94,10 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public BaseFragment findFragment(String fragmentTag) {
         return (BaseFragment) getFragmentManager().findFragmentByTag(fragmentTag);
+    }
+
+    public void popFragment() {
+        onBackPressed();
     }
 
     public void popToFragment(String transactionTag) {
