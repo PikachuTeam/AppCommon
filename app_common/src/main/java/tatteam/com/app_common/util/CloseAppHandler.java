@@ -49,7 +49,7 @@ public class CloseAppHandler {
                 });
     }
 
-    public void handlerKeyBack(Activity activity) {
+    public void setKeyBackPress(Activity activity) {
         if (!showDialogIfNeeded(activity)) {
             handleDoubleBackToExit();
         }

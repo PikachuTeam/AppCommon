@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
     @Override
     public void onBackPressed() {
 //        super.onBackPressed();
-        closeAppHandler.handlerKeyBack(this);
+        closeAppHandler.setKeyBackPress(this);
     }
 
     @Override
