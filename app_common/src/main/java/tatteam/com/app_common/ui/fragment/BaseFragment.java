@@ -34,6 +34,12 @@ public abstract class BaseFragment extends Fragment {
         }
     }
 
+    public void runOnUIThread(Runnable runnable) {
+        if (getBaseActivity() != null) {
+            getBaseActivity().runOnUiThread(runnable);
+        }
+    }
+
     public Object getHolder(String key) {
         return getBaseActivity().getHolder(key);
     }
