@@ -69,6 +69,13 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        adsSmallBannerHandler.destroy();
+        adsBigBannerHandler.destroy();
+    }
+
+    @Override
     public void onClick(View view) {
         if (view == btnMoreApps) {
             AppCommon.getInstance().openMoreAppDialog(this);

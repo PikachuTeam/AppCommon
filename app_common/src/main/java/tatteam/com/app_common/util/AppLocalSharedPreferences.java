@@ -124,6 +124,11 @@ public class AppLocalSharedPreferences {
         return pref.getString(adsType.getType(), "");
     }
 
+    public boolean isAdsExist(AppConstant.AdsType adsType, String adsId){
+        String currentAdsId = getAdsId(adsType);
+        return currentAdsId.equals(adsId);
+    }
+
     public void removeAdsId(AppConstant.AdsType adsType) {
         setAdsId(adsType, "");
     }
