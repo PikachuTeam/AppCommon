@@ -23,6 +23,8 @@ import tatteam.com.app_common.R;
 
 /**
  * Created by ThanhNH on 2/16/2016.
+ * Coppyright https://github.com/cosic/RippleEffect
+ *  compile 'com.github.traex.rippleeffect:library:1.3'
  */
 public class RippleView extends RelativeLayout {
     private int WIDTH;
