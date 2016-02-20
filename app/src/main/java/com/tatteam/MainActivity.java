@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
     private FrameLayout adsContainer;
     private AdsSmallBannerHandler adsSmallBannerHandler;
     private AdsBigBannerHandler adsBigBannerHandler;
+    private Button buttonFlat;
+    private Button buttonRaised;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +54,16 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
         bntAdsBigBanner = (Button) findViewById(R.id.btn_ads_big_banner);
         btn_select_sqlite = (Button) findViewById(R.id.btn_select_sqlite);
         btn_base_activity = (Button) findViewById(R.id.btn_base_activity);
+        buttonFlat = (Button) findViewById(R.id.buttonFlat);
+        buttonRaised = (Button) findViewById(R.id.buttonRaised);
 
         btnMoreApps.setOnClickListener(this);
         bntTextToSpeech.setOnClickListener(this);
         bntAdsBigBanner.setOnClickListener(this);
         btn_select_sqlite.setOnClickListener(this);
         btn_base_activity.setOnClickListener(this);
+        buttonFlat.setOnClickListener(this);
+        buttonRaised.setOnClickListener(this);
     }
 
     private void setupAds() {
