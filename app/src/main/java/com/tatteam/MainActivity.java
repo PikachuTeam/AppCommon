@@ -16,6 +16,7 @@ import tatteam.com.app_common.ads.AdsSmallBannerHandler;
 import tatteam.com.app_common.util.AppConstant;
 import tatteam.com.app_common.util.AppSpeaker;
 import tatteam.com.app_common.util.CloseAppHandler;
+import tatteam.com.app_common.util.CommonUtil;
 
 
 public class MainActivity extends AppCompatActivity implements CloseAppHandler.OnCloseAppListener, View.OnClickListener {
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
     private Button btnMoreApps;
     private Button bntTextToSpeech;
     private Button bntAdsBigBanner;
+    private Button btnShare;
     private Button btn_select_sqlite, btn_base_activity;
     private FrameLayout adsContainer;
     private AdsSmallBannerHandler adsSmallBannerHandler;
@@ -56,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
         btn_base_activity = (Button) findViewById(R.id.btn_base_activity);
         buttonFlat = (Button) findViewById(R.id.buttonFlat);
         buttonRaised = (Button) findViewById(R.id.buttonRaised);
+        btnShare = (Button) findViewById(R.id.btn_share);
 
         btnMoreApps.setOnClickListener(this);
         bntTextToSpeech.setOnClickListener(this);
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
         btn_base_activity.setOnClickListener(this);
         buttonFlat.setOnClickListener(this);
         buttonRaised.setOnClickListener(this);
+        btnShare.setOnClickListener(this);
     }
 
     private void setupAds() {
@@ -98,6 +102,10 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
             Toast.makeText(this, count + " exams", Toast.LENGTH_SHORT).show();
         } else if (view == btn_base_activity) {
             startActivity(new Intent(this, DemoBaseActivity.class));
+        } else if (view == btnShare) {
+            String androidLink = "https://play.google.com/store/apps/details?id=" + getApplication().getPackageName();
+            String sharedText = "This is an awesome app.\nAndroid: " + androidLink;
+            CommonUtil.sharePlainText(this, sharedText);
         }
     }
 
