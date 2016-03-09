@@ -117,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
 
     @Override
     public void onRateAppDialogClose() {
-//        finish();
+        finish();
     }
 
     @Override

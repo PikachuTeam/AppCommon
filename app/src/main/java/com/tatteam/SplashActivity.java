@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import tatteam.com.app_common.AppCommon;
 import tatteam.com.app_common.sqlite.DatabaseLoader;
+import tatteam.com.app_common.ui.activity.EssentialSplashActivity;
 import tatteam.com.app_common.util.AppConstant;
 import tatteam.com.app_common.util.AppSpeaker;
 import tatteam.com.app_common.ui.activity.BaseSplashActivity;
@@ -13,16 +14,15 @@ import tatteam.com.app_common.ui.activity.BaseSplashActivity;
 /**
  * Created by ThanhNH-Mac on 10/23/15.
  */
-public class SplashActivity extends BaseSplashActivity {
-
-    @Override
-    protected int getLayoutResIdContentView() {
-        return R.layout.activity_splash;
-    }
+public class SplashActivity extends EssentialSplashActivity {
 
     @Override
     protected void onCreateContentView() {
+        super.onCreateContentView(); // <- keep it, very important
+
         //find views, handle actions
+
+
     }
 
     @Override
