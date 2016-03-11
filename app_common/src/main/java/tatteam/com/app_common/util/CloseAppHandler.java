@@ -28,7 +28,8 @@ public class CloseAppHandler {
 
     public CloseAppHandler(Activity activity, boolean withRateApp) {
         this.context = activity;
-        if (withRateApp) {
+        this.withRateApp = withRateApp;
+        if (this.withRateApp) {
             setupRateApp();
         }
     }
