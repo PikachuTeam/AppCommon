@@ -20,10 +20,17 @@ public class CloseAppHandler {
     private int rateAppOverLaunchTime = 3;
     private int rateAppOverDate = 1;
     private long backPressedPeriod;
+    private boolean withRateApp;
 
     public CloseAppHandler(Activity activity) {
+        this(activity, true);
+    }
+
+    public CloseAppHandler(Activity activity, boolean withRateApp) {
         this.context = activity;
-        setupRateApp();
+        if (withRateApp) {
+            setupRateApp();
+        }
     }
 
     private void setupRateApp() {
@@ -50,12 +57,12 @@ public class CloseAppHandler {
     }
 
     public void setKeyBackPress(Activity activity) {
-        if (!showDialogIfNeeded(activity)) {
+        if (!withRateApp || !showRatingDialogIfNeeded(activity)) {
             handleDoubleBackToExit();
         }
     }
 
-    private boolean showDialogIfNeeded(Activity activity) {
+    private boolean showRatingDialogIfNeeded(Activity activity) {
         boolean isSkipRating = AppLocalSharedPreferences.getInstance().isSkipRating();
         boolean isRateAlready = AppLocalSharedPreferences.getInstance().isRatedApp();
         boolean isRateOverLaunchTime = AppLocalSharedPreferences.getInstance().isRateAppOverLaunchTime(rateAppOverLaunchTime);
