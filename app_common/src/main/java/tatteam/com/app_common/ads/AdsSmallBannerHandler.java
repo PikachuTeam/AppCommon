@@ -97,6 +97,8 @@ public class AdsSmallBannerHandler extends BaseAdsBannerHandler {
     @Override
     public void destroy() {
         super.destroy();
-        retryHandler.removeCallbacksAndMessages(null);
+        if (retryHandler != null) {
+            retryHandler.removeCallbacksAndMessages(null);
+        }
     }
 }
