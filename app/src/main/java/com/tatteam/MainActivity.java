@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdSize;
+
 import java.util.Locale;
 
 import tatteam.com.app_common.AppCommon;
@@ -26,8 +28,8 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
     private Button bntAdsBigBanner;
     private Button btnShare;
     private Button btn_select_sqlite, btn_base_activity;
-    private FrameLayout adsContainer;
-    private AdsSmallBannerHandler adsSmallBannerHandler;
+    private FrameLayout adsContainer, adsContainer2;
+    private AdsSmallBannerHandler adsSmallBannerHandler, adsSmallBannerHandler2;
     private AdsBigBannerHandler adsBigBannerHandler;
     private Button buttonFlat;
     private Button buttonRaised;
@@ -50,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
 
     private void findViews() {
         adsContainer = (FrameLayout) findViewById(R.id.ads_container);
-
+        adsContainer2 = (FrameLayout) findViewById(R.id.ads_container_2);
         btnMoreApps = (Button) findViewById(R.id.btn_more_apps);
         bntTextToSpeech = (Button) findViewById(R.id.btn_text_to_speech);
         bntAdsBigBanner = (Button) findViewById(R.id.btn_ads_big_banner);
@@ -74,6 +76,9 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
         adsSmallBannerHandler = new AdsSmallBannerHandler(this, adsContainer, AppConstant.AdsType.SMALL_BANNER_TEST);
         adsSmallBannerHandler.setup();
 
+        adsSmallBannerHandler2 = new AdsSmallBannerHandler(this, adsContainer2, AppConstant.AdsType.SMALL_BANNER_TEST, AdSize.MEDIUM_RECTANGLE);
+        adsSmallBannerHandler2.setup();
+
         adsBigBannerHandler = new AdsBigBannerHandler(this, AppConstant.AdsType.BIG_BANNER_TEST);
         adsBigBannerHandler.setup();
     }
@@ -82,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
     protected void onDestroy() {
         super.onDestroy();
         adsSmallBannerHandler.destroy();
+        adsSmallBannerHandler2.destroy();
         adsBigBannerHandler.destroy();
     }
 
