@@ -9,6 +9,8 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.google.android.gms.ads.AdSize;
+import com.tatteam.database.BaseIndoDataSource;
+import com.tatteam.database.BaseItalyDataSource;
 
 import java.util.Locale;
 
@@ -104,8 +106,16 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
         } else if (view == bntAdsBigBanner) {
             adsBigBannerHandler.show();
         } else if (view == btn_select_sqlite) {
-            int count = DataSource.countExams();
-            Toast.makeText(this, count + " exams", Toast.LENGTH_SHORT).show();
+
+            //v1
+//            int count = DataSource.countExams();
+//            Toast.makeText(this, count + " exams", Toast.LENGTH_SHORT).show();
+
+            //v2
+            int indoCount = BaseIndoDataSource.countExams();
+            int italyCount = BaseItalyDataSource.countExams();
+            Toast.makeText(this, "Indo " + indoCount + " exams" + "\n" + "Italy " + italyCount + " exams", Toast.LENGTH_SHORT).show();
+
         } else if (view == btn_base_activity) {
             startActivity(new Intent(this, DemoBaseActivity.class));
         } else if (view == btnShare) {

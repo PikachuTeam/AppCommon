@@ -2,6 +2,8 @@ package com.tatteam;
 
 import android.content.Intent;
 
+import com.tatteam.database.PoolDatabaseLoader;
+
 import java.util.Locale;
 
 import tatteam.com.app_common.AppCommon;
@@ -9,7 +11,6 @@ import tatteam.com.app_common.sqlite.DatabaseLoader;
 import tatteam.com.app_common.ui.activity.EssentialSplashActivity;
 import tatteam.com.app_common.util.AppConstant;
 import tatteam.com.app_common.util.AppSpeaker;
-import tatteam.com.app_common.ui.activity.BaseSplashActivity;
 
 /**
  * Created by ThanhNH-Mac on 10/23/15.
@@ -21,8 +22,6 @@ public class SplashActivity extends EssentialSplashActivity {
         super.onCreateContentView(); // <- keep it, very important
 
         //find views, handle actions
-
-
     }
 
     @Override
@@ -34,8 +33,11 @@ public class SplashActivity extends EssentialSplashActivity {
         //init text to speech
         AppSpeaker.getInstance().initIfNeeded(getApplicationContext(), Locale.ENGLISH);
 
-        //import database
-        DatabaseLoader.getInstance().createIfNeeded(getApplicationContext(), "test_common.db");
+        //import database v1
+        //DatabaseLoader.getInstance().createIfNeeded(getApplicationContext(), "italy_driving.db");
+
+        //import database v2
+        PoolDatabaseLoader.getInstance().initIfNeeded(getApplicationContext());
     }
 
     @Override
