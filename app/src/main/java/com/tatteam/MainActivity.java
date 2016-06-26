@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
@@ -16,6 +17,7 @@ import java.util.Locale;
 
 import tatteam.com.app_common.AppCommon;
 import tatteam.com.app_common.ads.AdsBigBannerHandler;
+import tatteam.com.app_common.ads.AdsNativeExpressHandler;
 import tatteam.com.app_common.ads.AdsSmallBannerHandler;
 import tatteam.com.app_common.util.AppConstant;
 import tatteam.com.app_common.util.AppSpeaker;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
     private FrameLayout adsContainer, adsContainer2;
     private AdsSmallBannerHandler adsSmallBannerHandler, adsSmallBannerHandler2;
     private AdsBigBannerHandler adsBigBannerHandler;
+    private AdsNativeExpressHandler adsNativeExpressHandler;
     private Button buttonFlat;
     private Button buttonRaised;
 
@@ -83,6 +86,9 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
 
         adsBigBannerHandler = new AdsBigBannerHandler(this, AppConstant.AdsType.BIG_BANNER_TEST);
         adsBigBannerHandler.setup();
+
+        adsNativeExpressHandler = new AdsNativeExpressHandler(this, (ViewGroup) findViewById(R.id.ads_container_native_express), AppConstant.AdsType.NATIVE_EXPRESS_TEST);
+        adsNativeExpressHandler.setup();
     }
 
     @Override
@@ -91,6 +97,7 @@ public class MainActivity extends AppCompatActivity implements CloseAppHandler.O
         adsSmallBannerHandler.destroy();
         adsSmallBannerHandler2.destroy();
         adsBigBannerHandler.destroy();
+        adsNativeExpressHandler.destroy();
     }
 
     @Override

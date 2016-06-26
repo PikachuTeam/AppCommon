@@ -28,7 +28,9 @@ public class SplashActivity extends EssentialSplashActivity {
     protected void onInitAppCommon() {
         AppCommon.getInstance().initIfNeeded(getApplicationContext());
         AppCommon.getInstance().increaseLaunchTime();
-        AppCommon.getInstance().syncAdsIfNeeded(AppConstant.AdsType.SMALL_BANNER_TEST, AppConstant.AdsType.BIG_BANNER_TEST);
+        AppCommon.getInstance().syncAdsIfNeeded(AppConstant.AdsType.SMALL_BANNER_TEST,
+                AppConstant.AdsType.BIG_BANNER_TEST,
+                AppConstant.AdsType.NATIVE_EXPRESS_TEST);
 
         //init text to speech
         AppSpeaker.getInstance().initIfNeeded(getApplicationContext(), Locale.ENGLISH);

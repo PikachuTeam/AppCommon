@@ -11,6 +11,7 @@
         android:layout_above="@+id/ads_container">
 
         <LinearLayout
+            android:descendantFocusability="blocksDescendants"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -106,6 +107,12 @@
 
             <FrameLayout
                 android:id="@+id/ads_container_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+            <FrameLayout
+                android:id="@+id/ads_container_native_express"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center" />
